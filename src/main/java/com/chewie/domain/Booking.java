@@ -1,11 +1,9 @@
 package com.chewie.domain;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import lombok.Data;
 
@@ -17,7 +15,11 @@ public class Booking implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
+    @Column(nullable = false)
     private String type;
-    @ManyToOne
+    @JoinColumn( nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
     private User user;
+    @Column( nullable = false)
+    private Timestamp bookedOn;
 }

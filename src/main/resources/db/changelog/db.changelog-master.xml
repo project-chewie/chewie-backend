@@ -14,7 +14,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
 				<constraints unique="true" uniqueConstraintName="user_unique_name" />
 			</column>
             <column name="password" type="varchar(250)">
-				<constraints unique="true" uniqueConstraintName="user_unique_password" />
+				<constraints nullable="false" notNullConstraintName="user_password_notnull" />
 			</column>
 			<column name="is_active" type="boolean" defaultValueBoolean="true"></column>
 		</createTable>
@@ -22,14 +22,24 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
 			<column name="id" type="bigint">
 				<constraints primaryKey="true" primaryKeyName="booking_pk" />
 			</column>
-			<column name="type" type="varchar(250)" />
-			<column name="FK_User" type="bigint">
+			<column name="type" type="varchar(250)" >
+				<constraints nullable="false" notNullConstraintName="user_booking_notnull" />
+			</column>
+			<column name="user_id" type="bigint">
 				<constraints nullable="false" notNullConstraintName="user_booking_notnull" />
 			</column>
 		</createTable>
 		<addAutoIncrement tableName="USER" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
 		<addAutoIncrement tableName="BOOKING" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
 		<createSequence sequenceName="hibernate_sequence" incrementBy="1" startValue="1" />
-		<addForeignKeyConstraint baseTableName="BOOKING" baseColumnNames="FK_USER" constraintName="user_booking_fk" referencedTableName="USER" referencedColumnNames="id" />
+		<addForeignKeyConstraint baseTableName="BOOKING" baseColumnNames="user_id" constraintName="user_booking_fk" referencedTableName="USER" referencedColumnNames="id" />
+	</changeSet>
+	<changeSet id="20211006" author="baskarami">
+		<addColumn tableName="BOOKING" >
+			<column name="booked_On"
+					type="timestamp">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
 	</changeSet>
 </databaseChangeLog>
