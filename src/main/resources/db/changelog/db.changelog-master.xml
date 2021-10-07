@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:pro="http://www.liquibase.org/xml/ns/pro" 
+xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+	<changeSet id="20211005" author="baskarami">
+		<createTable tableName="USER">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" primaryKeyName="user_pk" />
+			</column>
+			<column name="name" type="varchar(250)">
+				<constraints unique="true" uniqueConstraintName="user_unique_name" />
+			</column>
+            <column name="password" type="varchar(250)">
+				<constraints unique="true" uniqueConstraintName="user_unique_password" />
+			</column>
+			<column name="is_active" type="boolean" defaultValueBoolean="true"></column>
+		</createTable>
+		<createTable tableName="BOOKING">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" primaryKeyName="booking_pk" />
+			</column>
+			<column name="type" type="varchar(250)" />
+			<column name="FK_User" type="bigint">
+				<constraints nullable="false" notNullConstraintName="user_booking_notnull" />
+			</column>
+		</createTable>
+		<addAutoIncrement tableName="USER" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+		<addAutoIncrement tableName="BOOKING" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+		<createSequence sequenceName="hibernate_sequence" incrementBy="1" startValue="1" />
+		<addForeignKeyConstraint baseTableName="BOOKING" baseColumnNames="FK_USER" constraintName="user_booking_fk" referencedTableName="USER" referencedColumnNames="id" />
+	</changeSet>
+</databaseChangeLog>
