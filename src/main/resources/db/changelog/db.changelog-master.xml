@@ -42,4 +42,27 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
 			</column>
 		</addColumn>
 	</changeSet>
+	<changeSet id="20211010" author="baskarami">
+		<renameColumn columnDataType="varchar(250)" newColumnName="fk_Type" oldColumnName="type" remarks="References FK of new table" tableName="Booking"/>
+		<renameColumn columnDataType="int" newColumnName="fK_User" oldColumnName="user_id" remarks="References FK of User table" tableName="Booking"/>
+		<createTable tableName="BOOKING_TYPE">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" primaryKeyName="booking_type_pk" />
+			</column>
+			<column name="incoming" type="boolean" >
+				<constraints nullable="false" notNullConstraintName="booking_type_notnull" />
+			</column>
+		</createTable>
+				<modifyDataType columnName="fk_Type" newDataType="bigint" tableName="BOOKING"/>
+		<addForeignKeyConstraint baseTableName="BOOKING" baseColumnNames="fk_Type" constraintName="booking_type_fk" referencedTableName="BOOKING_TYPE" referencedColumnNames="id" />
+		<insert tableName="BOOKING_TYPE">
+			<column name="id" value="1"/>
+			<column name="incoming" valueBoolean="true"/>
+		</insert>
+		<insert tableName="BOOKING_TYPE">
+			<column name="id" value="2"/>
+			<column name="incoming" valueBoolean="false"/>
+		</insert>
+		<addAutoIncrement tableName="BOOKING_TYPE" columnName="id" columnDataType="bigint" startWith="3" incrementBy="1" />
+	</changeSet>
 </databaseChangeLog>

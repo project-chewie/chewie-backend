@@ -15,11 +15,16 @@ public class Booking implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(nullable = false)
-    private String type;
-    @JoinColumn( nullable = false)
+    @JoinColumn(name = "fk_Type", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private BookingType type;
+    @JoinColumn(name = "fK_User", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
     private User user;
     @Column( nullable = false)
     private Timestamp bookedOn;
+
+    public Booking(){
+        this.bookedOn = new Timestamp(System.currentTimeMillis());
+    }
 }
