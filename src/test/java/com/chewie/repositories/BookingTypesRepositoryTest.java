@@ -1,20 +1,14 @@
 package com.chewie.repositories;
 
-import com.chewie.domain.Booking;
 import com.chewie.domain.BookingType;
-import com.chewie.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Condition;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestConstructor;
-
-import java.sql.Timestamp;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

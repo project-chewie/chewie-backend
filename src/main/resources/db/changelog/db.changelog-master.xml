@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xmlns:pro="http://www.liquibase.org/xml/ns/pro" 
-xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
-http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 	<changeSet id="20211005" author="baskarami">
 		<createTable tableName="USER">
 			<column name="id" type="bigint">
@@ -16,7 +14,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
             <column name="password" type="varchar(250)">
 				<constraints nullable="false" notNullConstraintName="user_password_notnull" />
 			</column>
-			<column name="is_active" type="boolean" defaultValueBoolean="true"></column>
+			<column name="is_active" type="boolean" defaultValueBoolean="true"/>
 		</createTable>
 		<createTable tableName="BOOKING">
 			<column name="id" type="bigint">
@@ -29,7 +27,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
 				<constraints nullable="false" notNullConstraintName="user_booking_notnull" />
 			</column>
 		</createTable>
-		<addAutoIncrement tableName="USER" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+		<addAutoIncrement tableName="USER" columnName="id" columnDataType="bigint" startWith="2" incrementBy="1" />
 		<addAutoIncrement tableName="BOOKING" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
 		<createSequence sequenceName="hibernate_sequence" incrementBy="1" startValue="1" />
 		<addForeignKeyConstraint baseTableName="BOOKING" baseColumnNames="user_id" constraintName="user_booking_fk" referencedTableName="USER" referencedColumnNames="id" />
@@ -64,5 +62,13 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
 			<column name="incoming" valueBoolean="false"/>
 		</insert>
 		<addAutoIncrement tableName="BOOKING_TYPE" columnName="id" columnDataType="bigint" startWith="3" incrementBy="1" />
+	</changeSet>
+	<changeSet id="20211014" author="baskarami">
+		<comment>Admin user add for testing and configuration purposes. Default password will be changed after first login</comment>
+		<insert tableName="USER">
+			<column name="id" value="1"/>
+			<column name="name" value="Admin"/>
+			<column name="password" value="ChangeMeUncrypted"/>
+		</insert>
 	</changeSet>
 </databaseChangeLog>

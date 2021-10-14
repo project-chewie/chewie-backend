@@ -4,7 +4,6 @@ import com.chewie.domain.Booking;
 import com.chewie.domain.BookingType;
 import com.chewie.domain.User;
 import com.chewie.repositories.BookingRepository;
-
 import org.assertj.core.api.Condition;
 import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
@@ -64,7 +63,7 @@ public class BookingServiceTest {
         var booking_has_user = new Condition<Booking>(b -> b.getUser()!=null, "Booking has any user");
         assertThat(bookingIn).is(booking_has_user);
         var bookingOut = bookingService.registerBooking(user, false);
-        Condition<Booking> compliantOutcomingBookingCondition = new Condition<Booking>(b -> b.getType().getIncoming()==false, "Booking is outcoming");
+        Condition<Booking> compliantOutcomingBookingCondition = new Condition<Booking>(b -> !b.getType().getIncoming(), "Booking is outcoming");
         assertThat(bookingOut).is(compliantOutcomingBookingCondition);
     }
 }

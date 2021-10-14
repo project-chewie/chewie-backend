@@ -1,10 +1,7 @@
 package com.chewie.repositories;
 
-import com.chewie.domain.Booking;
 import com.chewie.domain.BookingType;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.Optional;
 
 
 public interface BookingTypeRepository extends CrudRepository<BookingType, Integer> {

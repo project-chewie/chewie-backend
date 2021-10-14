@@ -1,13 +1,13 @@
 package com.chewie.domain;
 
-import java.io.Serializable;
+import lombok.Data;
+import lombok.NonNull;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import lombok.Data;
+import java.io.Serializable;
 
 
 @Data
@@ -16,7 +16,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
     @Column(unique = true)
     private String name;
     @Column(nullable = false)
@@ -25,5 +25,15 @@ public class User implements Serializable {
 
     public User(){
         this.isActive = true;
+    }
+
+    public User withUserName(@NonNull String username) {
+        this.setName(username);
+        return this;
+    }
+
+    public User withPassword(@NonNull String password) {
+        this.setPassword(password);
+        return this;
     }
 }
