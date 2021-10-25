@@ -40,7 +40,7 @@ public class BookingController {
     public Booking bookIncoming(@PathVariable(name = "id")Long user_id) {
         return bookingService.registerBooking(userService.findUserById(user_id), true);
     }
-    @Operation(summary = "This is to perform an outgoming booking")
+    @Operation(summary = "This is to perform an outcoming booking")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Details of the Booking",
