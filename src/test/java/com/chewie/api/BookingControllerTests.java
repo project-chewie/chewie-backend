@@ -29,7 +29,7 @@ public class BookingControllerTests extends AbstractTest {
     @DisplayName("book ingoing user")
     public void performInBooking()  {
         try {
-            String uri = "/users/{id}/booking_in";
+            String uri = "/booking_in/{id}";
             MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri,"1")
                     .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
@@ -47,7 +47,7 @@ public class BookingControllerTests extends AbstractTest {
     @Test
     @DisplayName("book outgoing user")
     public void performOutBooking()  {
-        String uri = "/users/{id}/booking_out";
+        String uri = "/booking_out/{id}";
         MvcResult mvcResult = null;
         try {
             mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri,"1")
@@ -68,7 +68,7 @@ public class BookingControllerTests extends AbstractTest {
     public void explodeWhenNoUser()  {
         try {
 
-            String uri = "/users/{id}/booking_in";
+            String uri = "/booking_in/{id}";
             MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri,"1000")
                     .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
@@ -83,8 +83,8 @@ public class BookingControllerTests extends AbstractTest {
     @Test
     @DisplayName("api http method mapping verification")
     public void apiContractIsNotViolated()  {
-        String uriOut = "/users/{id}/booking_out";
-        String uriIn = "/users/{id}/booking_in";
+        String uriOut = "/booking_out/{id}";
+        String uriIn = "/booking_in/{id}";
         MvcResult mvcResult = null;
         try {
             mvcResult = mvc.perform(MockMvcRequestBuilders.get(uriOut,"1")

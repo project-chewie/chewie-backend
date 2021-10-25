@@ -1,6 +1,9 @@
 package com.chewie;
 
 import java.io.IOException;
+import java.util.List;
+
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,5 +39,12 @@ public abstract class AbstractTest {
 
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(json, clazz);
+    }
+
+    protected <T> List<T> mapFromJsonToList(String json, Class<T> clazz)
+            throws JsonParseException, JsonMappingException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(json, mapper.getTypeFactory().constructCollectionType(List.class, clazz));
+
     }
 }
