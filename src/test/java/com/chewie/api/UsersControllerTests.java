@@ -32,7 +32,7 @@ public class UsersControllerTests extends AbstractTest {
     public void findAllUsers()  {
         try {
             String uri = "/users";
-            MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri,"1")
+            MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
                     .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
             int status = mvcResult.getResponse().getStatus();
