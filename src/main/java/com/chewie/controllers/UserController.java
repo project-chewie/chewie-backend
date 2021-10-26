@@ -37,6 +37,8 @@ public class UserController {
     public List<User> getUsers() {
         return userService.findAllUsers();
     }
+
+
     @Operation(summary = "This is to find a specific user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
