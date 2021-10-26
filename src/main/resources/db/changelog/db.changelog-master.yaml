@@ -171,4 +171,22 @@ databaseChangeLog:
                   name: password
                   value: ChangeMeUncrypted
             tableName: USER
-
+  - changeSet:
+      id: 'wikko'
+      author: WH-Git-User
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: saldo_pk
+                  name: id
+                  type: bigint
+              - column:
+                  constraints:
+                    notNullConstraintName: saldo_value_notnull
+                    nullable: false
+                  name: value
+                  type: double
+            tableName: SALDO
