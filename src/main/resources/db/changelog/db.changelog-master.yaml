@@ -205,4 +205,3 @@ databaseChangeLog:
                   name: value
                   value: '0'
             tableName: SALDO
-  - changeSet:
