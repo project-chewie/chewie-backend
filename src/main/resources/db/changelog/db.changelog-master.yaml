@@ -190,3 +190,19 @@ databaseChangeLog:
                   name: value
                   type: double
             tableName: SALDO
+  - changeSet:
+      id: 'wikko1'
+      author: WH-Git-User
+      comment: test-saldo added for Admin id --> value is 0
+      objectQuotingStrategy: LEGACY
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: '1'
+              - column:
+                  name: value
+                  value: '0'
+            tableName: SALDO
+  - changeSet:

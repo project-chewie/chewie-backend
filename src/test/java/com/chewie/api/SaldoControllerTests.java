@@ -50,10 +50,10 @@ public class SaldoControllerTests extends AbstractTest {
     }
 
     @Test
-    @DisplayName("find default admin saldo")
-    public void findUserById()  {
+    @DisplayName("find default saldo for admin ")
+    public void findSaldoById()  {
         try {
-            String uri = "/user/{id}";
+            String uri = "/saldo/{id}";
             MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri,"1")
                     .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
