@@ -14,14 +14,17 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 public class SaldoServiceTest {
+
     @InjectMocks
     SaldoService saldoService;
 
@@ -29,12 +32,6 @@ public class SaldoServiceTest {
     SaldoRepository saldoRepository;
 
 
-
-
-    @Test
-    public void updateSaldo(){
-
-    }
 
     @Test
     public void updateSaldoWithNulls(){
@@ -61,7 +58,13 @@ public class SaldoServiceTest {
         assertThrows(SaldoNotFoundException.class,()->{
             assertNull(saldoService.findSaldoById(1L));
         });
+    }
 
+    @Test
+    public void updateSaldoNotExistentId(){
+        assertThrows(NoSuchElementException.class,()->{
+            assertNull(saldoService.updateSaldo(1L, 0L));
+        });
     }
 
 

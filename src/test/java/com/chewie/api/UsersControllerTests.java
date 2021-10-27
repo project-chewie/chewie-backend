@@ -87,5 +87,4 @@ public class UsersControllerTests extends AbstractTest {
             fail(new StringBuilder("Broken mock caller!!!").append(e.getMessage()).toString());
         }
     }
-
 }

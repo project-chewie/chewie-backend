@@ -42,7 +42,7 @@ public class SaldoControllerTests extends AbstractTest {
             Saldo saldo=saldos.get(0);
             assertNotNull(saldo);
             assertEquals(1, (long) saldo.getId());
-            assertNotNull(saldo.getValue());
+            assertEquals(0, (long) saldo.getValue());
 
         } catch (Exception e) {
             fail(new StringBuilder("Broken mock caller!!!").append(e.getMessage()).toString());
@@ -73,12 +73,12 @@ public class SaldoControllerTests extends AbstractTest {
     @DisplayName("search not existent saldo")
     public void explodeWhenNoSaldo()  {
         try {
-
             String uri = "/saldo/{id}";
-            MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri,"1000")
+            MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri, "1000")
                     .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
             int status = mvcResult.getResponse().getStatus();
+            // it's important to note that the expected response should be 404 helpme
             assertEquals(405, status);
 
         } catch (Exception e) {
