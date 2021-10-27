@@ -190,39 +190,3 @@ databaseChangeLog:
                   name: value
                   type: double
             tableName: SALDO
-  - changeSet:
-      id: 'wikko1'
-      author: WH-Git-User
-      comment: test-saldo added for Admin id --> value is 0
-      objectQuotingStrategy: LEGACY
-      changes:
-        - insert:
-            columns:
-              - column:
-                  name: id
-                  value: '1'
-              - column:
-                  name: value
-                  value: '0'
-            tableName: SALDO
-  - changeSet:
-      id: 'wikko2'
-      author: WH-Git-User
-      - addAutoIncrement:
-            columnDataType: bigint
-            columnName: id
-            incrementBy: 1
-            startWith: 2
-            tableName: SALDO
-      - renameColumn:
-          columnDataType: bigint
-          newColumnName: user_id
-          oldColumnName: id
-          remarks: References ID of new USER table
-          tableName: SALDO
-      - addForeignKeyConstraint:
-          baseColumnNames: user_id
-          baseTableName: SALDO
-          constraintName: user_saldo_fk
-          referencedColumnNames: id
-          referencedTableName: USER
