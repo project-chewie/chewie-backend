@@ -3,6 +3,7 @@ package com.chewie.repositories;
 import com.chewie.domain.Saldo;
 import com.chewie.domain.User;
 import lombok.RequiredArgsConstructor;
+import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -32,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
         @BeforeEach
         void before() {
-            var saldo = new Saldo();
+            var saldo = new Saldo(1L);
             saldo.setValue(0L);
             lastInsertId=saldoRepository.save(saldo).getId();
         }
@@ -43,7 +44,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
             var saldoFound = saldoRepository.findById(lastInsertId);
             assertThat(saldoFound).isPresent();
-            //assertThat(saldoFound).hasValueSatisfying(condition);
         }
 
         @AfterEach

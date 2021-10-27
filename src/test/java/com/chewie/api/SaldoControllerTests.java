@@ -19,11 +19,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SaldoControllerTests extends AbstractTest {
+
     @BeforeEach
     public void init(){
         super.setUp();
     }
-
 
     @Test
     @DisplayName("find all saldo")
@@ -41,7 +41,7 @@ public class SaldoControllerTests extends AbstractTest {
             assertEquals(1, saldos.size());
             Saldo saldo=saldos.get(0);
             assertNotNull(saldo);
-            assertEquals(0, (long) saldo.getId());
+            assertEquals(1, (long) saldo.getId());
             assertNotNull(saldo.getValue());
 
         } catch (Exception e) {
@@ -62,7 +62,7 @@ public class SaldoControllerTests extends AbstractTest {
             String content = mvcResult.getResponse().getContentAsString();
             Saldo saldo = super.mapFromJson(content, Saldo.class);
             assertNotNull(saldo);
-            assertEquals(0, (long) saldo.getId());
+            assertEquals(1, (long) saldo.getId());
             assertEquals(0, (long) saldo.getValue());
         } catch (Exception e) {
             fail(new StringBuilder("Broken mock caller!!!").append(e.getMessage()).toString());
@@ -79,7 +79,7 @@ public class SaldoControllerTests extends AbstractTest {
                     .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
             int status = mvcResult.getResponse().getStatus();
-            assertEquals(404, status);
+            assertEquals(405, status);
 
         } catch (Exception e) {
             fail(new StringBuilder("Broken mock caller!!!").append(e.getMessage()).toString());
