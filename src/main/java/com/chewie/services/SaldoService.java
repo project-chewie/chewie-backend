@@ -23,8 +23,7 @@ public class SaldoService {
     public Saldo updateSaldo(@NonNull Long user_id, @NonNull Long saldo_value){
         Optional<Saldo> toBeUpdatedSaldo = saldoRepository.findById(user_id);
         Saldo saldo = toBeUpdatedSaldo.get();
-        saldo.setValue(saldo_value);
-        return saldoRepository.save(saldo);
+        return saldoRepository.save(saldo.withValue(saldo_value));
     }
 
     public Saldo findSaldoById(@NonNull Long user_id) {

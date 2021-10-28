@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.opentest4j.AssertionFailedError;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.NoSuchElementException;
@@ -67,5 +68,17 @@ public class SaldoServiceTest {
         });
     }
 
+    @Test
+    public void searchAllSaldoNonExistentSaldo(){
+        assertThrows(AssertionFailedError.class,()->{
+            assertNull(saldoService.findAllSaldos());
+        });
+    }
+
+    @Test
+    public void searchAllSaldoExistentSaldo(){
+        when(saldoRepository.findById(1L)).thenReturn(Optional.of(new Saldo(1L).withValue(0L)));
+        assertNotNull(saldoService.findAllSaldos());
+    }
 
 }
