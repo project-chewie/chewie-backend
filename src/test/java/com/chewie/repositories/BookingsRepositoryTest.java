@@ -59,16 +59,13 @@ public class BookingsRepositoryTest {
 
 /*
     @Test
-    @DisplayName("find last 2 bookings for user")
+    @DisplayName("find last booking for user")
     void testFindForUser() {
-        Booking[] bookings = bookingRepository.findLastBookingsForUser(Integer.toUnsignedLong(lastInsertId));
+        Booking booking = bookingRepository.findLastBookingsForUser(1L);
         var booking_has_user = new Condition<Booking>(b -> "User".equals(b.getUser().getName()), "Booking has user");
         var booking_is_incoming = new Condition<Booking>(b -> b.getType().getIncoming(), "Booking is incoming");
-        assertThat(bookings[0]).has(booking_has_user);
-        assertThat(bookings[0]).is(booking_is_incoming);
-
-        assertThat(bookings[1]).has(booking_has_user);
-        assertThat(bookings[1]).isNot(booking_is_incoming);
+        assertThat(booking).has(booking_has_user);
+        assertThat(booking).is(booking_is_incoming);
     }
 */
     @AfterEach
