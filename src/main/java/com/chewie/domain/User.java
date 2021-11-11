@@ -1,5 +1,7 @@
 package com.chewie.domain;
 
+import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvNumber;
 import lombok.Data;
 import lombok.NonNull;
 
@@ -16,11 +18,16 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
+    @CsvBindByPosition(position = 0)
+    @CsvNumber("10")
     private Long id;
     @Column(unique = true)
+    @CsvBindByPosition(position = 1)
     private String name;
     @Column(nullable = false)
+    @CsvBindByPosition(position = 2)
     private String password;
+    @CsvBindByPosition(position = 3)
     private boolean isActive;
 
     public User(){
