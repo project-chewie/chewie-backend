@@ -1,0 +1,202 @@
+
+databaseChangeLog:
+  - changeSet:
+      id: '20211005'
+      author: baskarami
+      objectQuotingStrategy: LEGACY
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: user_pk
+                  name: id
+                  type: bigint
+              - column:
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: user_unique_name
+                  name: name
+                  type: varchar(250)
+              - column:
+                  constraints:
+                    notNullConstraintName: user_password_notnull
+                    nullable: false
+                  name: password
+                  type: varchar(250)
+              - column:
+                  defaultValueBoolean: true
+                  name: is_active
+                  type: boolean
+            tableName: test.USER
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: booking_pk
+                  name: id
+                  type: bigint
+              - column:
+                  constraints:
+                    notNullConstraintName: user_booking_notnull
+                    nullable: false
+                  name: type
+                  type: varchar(250)
+              - column:
+                  constraints:
+                    notNullConstraintName: user_booking_notnull
+                    nullable: false
+                  name: user_id
+                  type: bigint
+            tableName: test.BOOKING
+        - addAutoIncrement:
+            columnDataType: bigint
+            columnName: id
+            incrementBy: 1
+            startWith: 2
+            tableName: test.USER
+        - addAutoIncrement:
+            columnDataType: bigint
+            columnName: id
+            incrementBy: 1
+            startWith: 1
+            tableName: test.BOOKING
+        - createSequence:
+            incrementBy: 1
+            sequenceName: hibernate_sequence
+            startValue: 1
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: test.BOOKING
+            constraintName: user_booking_fk
+            referencedColumnNames: id
+            referencedTableName: test.USER
+  - changeSet:
+      id: '20211006'
+      author: baskarami
+      objectQuotingStrategy: LEGACY
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: booked_On
+                  type: timestamp
+            tableName: test.BOOKING
+  - changeSet:
+      id: '20211010'
+      author: baskarami
+      objectQuotingStrategy: LEGACY
+      changes:
+        - renameColumn:
+            columnDataType: varchar(250)
+            newColumnName: fk_Type
+            oldColumnName: type
+            remarks: References FK of new table
+            tableName: test.BOOKING
+        - renameColumn:
+            columnDataType: bigint
+            newColumnName: fK_User
+            oldColumnName: user_id
+            remarks: References FK of User table
+            tableName: test.BOOKING
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: booking_type_pk
+                  name: id
+                  type: bigint
+              - column:
+                  constraints:
+                    notNullConstraintName: booking_type_notnull
+                    nullable: false
+                  name: incoming
+                  type: boolean
+            tableName: test.BOOKING_TYPE
+        - modifyDataType:
+            columnName: fk_Type
+            newDataType: bigint
+            tableName: test.BOOKING
+        - addForeignKeyConstraint:
+            baseColumnNames: fk_Type
+            baseTableName: test.BOOKING
+            constraintName: booking_type_fk
+            referencedColumnNames: id
+            referencedTableName: test.BOOKING_TYPE
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: '1'
+              - column:
+                  name: incoming
+                  valueBoolean: true
+            tableName: test.BOOKING_TYPE
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: '2'
+              - column:
+                  name: incoming
+                  valueBoolean: false
+            tableName: test.BOOKING_TYPE
+  - changeSet:
+      id: '20211014'
+      author: baskarami
+      comment: Admin user add for testing and configuration purposes. Default password
+        will be changed after first login
+      objectQuotingStrategy: LEGACY
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: '1'
+              - column:
+                  name: name
+                  value: Admin
+              - column:
+                  name: password
+                  value: ChangeMeUncrypted
+            tableName: test.USER
+  - changeSet:
+      id: 'wikko'
+      author: WH-Git-User
+      objectQuotingStrategy: LEGACY
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: saldo_pk
+                  name: id
+                  type: bigint
+              - column:
+                  constraints:
+                    notNullConstraintName: saldo_value_notnull
+                    nullable: false
+                  name: value
+                  type: double
+            tableName: test.SALDO
+  - changeSet:
+      id: 'wikko2'
+      author: WH-Git-User
+      comment: added Saldo for Admin
+      objectQuotingStrategy: LEGACY
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: '1'
+              - column:
+                  name: value
+                  value: '0'
+            tableName: test.SALDO
