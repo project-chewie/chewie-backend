@@ -41,9 +41,7 @@ public class UsersRepositoryTest {
     void testFindById() {
 
         var userFound = userRepository.findById(lastInsertId);
-        var condition = new Condition<User>(u -> u.isActive(), "user is active per default");
         assertThat(userFound).isPresent();
-        assertThat(userFound).hasValueSatisfying(condition);
     }
 
     @AfterEach

@@ -29,7 +29,7 @@ databaseChangeLog:
                   defaultValueBoolean: true
                   name: is_active
                   type: boolean
-            tableName: USER
+            tableName: test.USER
         - createTable:
             columns:
               - column:
@@ -50,29 +50,29 @@ databaseChangeLog:
                     nullable: false
                   name: user_id
                   type: bigint
-            tableName: BOOKING
+            tableName: test.BOOKING
         - addAutoIncrement:
             columnDataType: bigint
             columnName: id
             incrementBy: 1
             startWith: 2
-            tableName: USER
+            tableName: test.USER
         - addAutoIncrement:
             columnDataType: bigint
             columnName: id
             incrementBy: 1
             startWith: 1
-            tableName: BOOKING
+            tableName: test.BOOKING
         - createSequence:
             incrementBy: 1
             sequenceName: hibernate_sequence
             startValue: 1
         - addForeignKeyConstraint:
             baseColumnNames: user_id
-            baseTableName: BOOKING
+            baseTableName: test.BOOKING
             constraintName: user_booking_fk
             referencedColumnNames: id
-            referencedTableName: USER
+            referencedTableName: test.USER
   - changeSet:
       id: '20211006'
       author: baskarami
@@ -85,7 +85,7 @@ databaseChangeLog:
                     nullable: false
                   name: booked_On
                   type: timestamp
-            tableName: BOOKING
+            tableName: test.BOOKING
   - changeSet:
       id: '20211010'
       author: baskarami
@@ -96,13 +96,13 @@ databaseChangeLog:
             newColumnName: fk_Type
             oldColumnName: type
             remarks: References FK of new table
-            tableName: Booking
+            tableName: test.BOOKING
         - renameColumn:
-            columnDataType: int
+            columnDataType: bigint
             newColumnName: fK_User
             oldColumnName: user_id
             remarks: References FK of User table
-            tableName: Booking
+            tableName: test.BOOKING
         - createTable:
             columns:
               - column:
@@ -117,17 +117,17 @@ databaseChangeLog:
                     nullable: false
                   name: incoming
                   type: boolean
-            tableName: BOOKING_TYPE
+            tableName: test.BOOKING_TYPE
         - modifyDataType:
             columnName: fk_Type
             newDataType: bigint
-            tableName: BOOKING
+            tableName: test.BOOKING
         - addForeignKeyConstraint:
             baseColumnNames: fk_Type
-            baseTableName: BOOKING
+            baseTableName: test.BOOKING
             constraintName: booking_type_fk
             referencedColumnNames: id
-            referencedTableName: BOOKING_TYPE
+            referencedTableName: test.BOOKING_TYPE
         - insert:
             columns:
               - column:
@@ -136,7 +136,7 @@ databaseChangeLog:
               - column:
                   name: incoming
                   valueBoolean: true
-            tableName: BOOKING_TYPE
+            tableName: test.BOOKING_TYPE
         - insert:
             columns:
               - column:
@@ -145,13 +145,7 @@ databaseChangeLog:
               - column:
                   name: incoming
                   valueBoolean: false
-            tableName: BOOKING_TYPE
-        - addAutoIncrement:
-            columnDataType: bigint
-            columnName: id
-            incrementBy: 1
-            startWith: 3
-            tableName: BOOKING_TYPE
+            tableName: test.BOOKING_TYPE
   - changeSet:
       id: '20211014'
       author: baskarami
@@ -170,7 +164,7 @@ databaseChangeLog:
               - column:
                   name: password
                   value: ChangeMeUncrypted
-            tableName: USER
+            tableName: test.USER
   - changeSet:
       id: 'wikko'
       author: WH-Git-User
@@ -190,7 +184,7 @@ databaseChangeLog:
                     nullable: false
                   name: value
                   type: double
-            tableName: SALDO
+            tableName: test.SALDO
   - changeSet:
       id: 'wikko2'
       author: WH-Git-User
@@ -205,4 +199,4 @@ databaseChangeLog:
               - column:
                   name: value
                   value: '0'
-            tableName: SALDO
+            tableName: test.SALDO
